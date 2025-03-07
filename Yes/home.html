@@ -109,12 +109,12 @@
 </head>
 <body>
     <div class="photo-container">
-        <img src="0.jpg" class="photo" data-number="0" draggable="true">
-        <img src="1.jpg" class="photo" data-number="1" draggable="true">
-        <img src="2.jpg" class="photo" data-number="2" draggable="true">
-        <img src="3.jpg" class="photo" data-number="3" draggable="true">
-        <img src="4.jpg" class="photo" data-number="4" draggable="true">
-        <img src="5.jpg" class="photo" data-number="5" draggable="true">
+        <img src="0.jpg" class="photo" data-number="0">
+        <img src="1.jpg" class="photo" data-number="1">
+        <img src="2.jpg" class="photo" data-number="2">
+        <img src="3.jpg" class="photo" data-number="3">
+        <img src="4.jpg" class="photo" data-number="4">
+        <img src="5.jpg" class="photo" data-number="5">
     </div>
     <div class="grid-container" id="grid">
         <div class="grid-cell" data-position="0"></div>
@@ -133,18 +133,18 @@
     </div>
     <script>
         let draggedItem = null;
-        
+
         document.querySelectorAll(".photo").forEach(photo => {
-            photo.addEventListener("dragstart", (e) => {
+            photo.addEventListener("touchstart", (e) => {
                 draggedItem = e.target;
             });
         });
-        
+
         document.querySelectorAll(".grid-cell").forEach(cell => {
             cell.addEventListener("dragover", (e) => {
                 e.preventDefault();
             });
-            cell.addEventListener("drop", (e) => {
+            cell.addEventListener("touchend", (e) => {
                 if (draggedItem && !cell.hasChildNodes()) {
                     cell.appendChild(draggedItem);
                     draggedItem = null;
@@ -152,7 +152,7 @@
                 }
             });
         });
-        
+
         function checkCompletion() {
             let correct = true;
             let incorrect = false;
@@ -163,11 +163,11 @@
                     incorrect = true;
                 }
             });
-            
+
             document.getElementById("finishButton").classList.toggle("hidden", !correct);
             document.getElementById("retryButton").classList.toggle("hidden", !incorrect);
         }
-        
+
         function showPopup() {
             document.getElementById("popup").style.display = "block";
         }
