@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Lucu dan Unik</title>
+    <style>
+        body {
+            background-color: #FFC0CB;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin-top: 50px;
+            max-width: 90%;
+        }
+        h1 {
+            color: #FF69B4;
+        }
+        p {
+            color: #D1477F;
+        }
+        .btn {
+            background: #FF69B4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #D1477F;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            width: 80%;
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+        }
+        .popup button {
+            margin-top: 15px;
+            background: #FF69B4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background: #D1477F;
+        }
+        .flowers {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.8;
+            animation: float 6s infinite ease-in-out alternate;
+        }
+        .flower1 { top: 40%; left: 5%; animation-delay: 0s; }
+        .flower2 { top: 50%; right: 10%; animation-delay: 1s; }
+        .flower3 { bottom: 10%; left: 20%; animation-delay: 2s; }
+        .flower4 { bottom: 0; right: 20%; animation-delay: 3s; }
+
+        .music-control {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 105, 180, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes float {
+            from {
+                transform: translateY(0px);
+            }
+            to {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                margin-top: 30px;
+            }
+            .popup {
+                width: 90%;
+            }
+            .flowers {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="ILY.mp3" type="audio/mp3">
+        Browser Anda tidak mendukung tag audio.
+    </audio>
+    <div class="music-control">
+        <button class="btn" onclick="toggleMusic()">🎵 Putar / Hentikan Musik</button>
+    </div>
+    
+    <div class="container">
+        <h1>Selamat Datang!</h1>
+        <p>Website ini dibuat khusus untuk perempuan bernama PUTRI!! CONGRATSS.</p>
+        <button class="btn" onclick="showPopup('Heii Happy 18th🌷 Adik Kecil, Semoga Impian kamu terwujud yaa, makasi banyak buat kamu dan keluarga kamu jugaa, makasih udah mau ngukir moment di tasik bareng aku')">HEII THX U!!</button>
+        <button class="btn" onclick="showPopup('hii aku udah buat rekap sekaligus vlog yang aku buat dalam satu video pas lagi ngebuat web ini')">Proses Pembuatan</button>
+    </div>
+    <div class="flowers flower1">🌸</div>
+    <div class="flowers flower2">🌷</div>
+    <div class="flowers flower3">🌹</div>
+    <div class="flowers flower4">🌺</div>
+    
+    <div id="popup" class="popup">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">Tutup</button>
+    </div>
+    
+    <script>
+        function showPopup(message) {
+            document.getElementById("popup-message").innerText = message;
+            document.getElementById("popup").style.display = "block";
+        }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        
+        function toggleMusic() {
+            var music = document.getElementById("background-music");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+    </script>
+</body>
+</html>

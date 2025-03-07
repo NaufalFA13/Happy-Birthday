@@ -1,0 +1,101 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffccdc;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+}
+
+.flower-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.flower {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: pink;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100vh) scale(1); }
+    100% { transform: translateY(100vh) scale(0.5); }
+}
+
+.container {
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    background: #ffe4e9;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.icon {
+    color: #ff6699;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #d63384;
+    font-size: 18px;
+}
+
+input {
+    padding: 10px;
+    border: 2px solid #ff6699;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+    max-width: 300px;
+}
+
+button {
+    background-color: #ff6699;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #d63384;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 15px;
+    }
+    input, button {
+        font-size: 16px;
+    }
+}
