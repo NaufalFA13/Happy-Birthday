@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabungkan Foto</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6f2;
+            margin: 0;
+            flex-direction: column;
+        }
+        .photo-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .photo {
+            width: 80px;
+            height: 80px;
+            cursor: grab;
+            border: 2px solid #ff66b2;
+            border-radius: 10px;
+            touch-action: none;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            grid-template-rows: repeat(2, 80px);
+            gap: 5px;
+            border: 2px dashed #ff66b2;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .grid-cell {
+            width: 80px;
+            height: 80px;
+            background-color: #fff0f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ff66b2;
+            position: relative;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff0f5;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            text-align: center;
+            max-width: 90%;
+        }
+        .popup img {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+        .button {
+            margin-top: 10px;
+            padding: 12px 24px;
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            width: 200px;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #ff3385;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .photo {
+                width: 60px;
+                height: 60px;
+            }
+            .grid-container {
+                grid-template-columns: repeat(3, 60px);
+                grid-template-rows: repeat(2, 60px);
+            }
+            .grid-cell {
+                width: 60px;
+                height: 60px;
+            }
+            .button {
+                width: 150px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="photo-container">
+        <img src="0.jpg" class="photo" data-number="0">
+        <img src="1.jpg" class="photo" data-number="1">
+        <img src="2.jpg" class="photo" data-number="2">
+        <img src="3.jpg" class="photo" data-number="3">
+        <img src="4.jpg" class="photo" data-number="4">
+        <img src="5.jpg" class="photo" data-number="5">
+    </div>
+    <div class="grid-container" id="grid">
+        <div class="grid-cell" data-position="0"></div>
+        <div class="grid-cell" data-position="1"></div>
+        <div class="grid-cell" data-position="2"></div>
+        <div class="grid-cell" data-position="3"></div>
+        <div class="grid-cell" data-position="4"></div>
+        <div class="grid-cell" data-position="5"></div>
+    </div>
+    <button id="retryButton" class="button hidden" onclick="resetGrid()">Ulang</button>
+    <button id="finishButton" class="button hidden" onclick="showPopup()">Selesai</button>
+    <div class="popup" id="popup">
+        <img id="finalImage" src="kolapse.png" alt="Gambar Utuh">
+        <br>
+        <button class="button" onclick="closePopup()"><a href="kisah.html" style="text-decoration-line: none; color: white;">Lanjut</a></button>
+    </div>
+    <script>
+        let draggedItem = null;
+
+        document.querySelectorAll(".photo").forEach(photo => {
+            photo.addEventListener("touchstart", (e) => {
+                draggedItem = e.target;
+            });
+        });
+
+        document.querySelectorAll(".grid-cell").forEach(cell => {
+            cell.addEventListener("dragover", (e) => {
+                e.preventDefault();
+            });
+            cell.addEventListener("touchend", (e) => {
+                if (draggedItem && !cell.hasChildNodes()) {
+                    cell.appendChild(draggedItem);
+                    draggedItem = null;
+                    checkCompletion();
+                }
+            });
+        });
+
+        function checkCompletion() {
+            let correct = true;
+            let incorrect = false;
+            document.querySelectorAll(".grid-cell").forEach(cell => {
+                let img = cell.querySelector("img");
+                if (!img || img.dataset.number !== cell.dataset.position) {
+                    correct = false;
+                    incorrect = true;
+                }
+            });
+
+            document.getElementById("finishButton").classList.toggle("hidden", !correct);
+            document.getElementById("retryButton").classList.toggle("hidden", !incorrect);
+        }
+
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        function resetGrid() {
+            document.querySelectorAll(".grid-cell").forEach(cell => cell.innerHTML = "");
+            document.getElementById("retryButton").classList.add("hidden");
+            document.getElementById("finishButton").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>

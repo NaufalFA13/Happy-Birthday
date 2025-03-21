@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Lucu dan Unik</title>
+    <style>
+        body {
+            background-color: #FFC0CB;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin-top: 50px;
+            max-width: 90%;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            color: #FF69B4;
+            font-size: 2em;
+        }
+        p {
+            color: #D1477F;
+            font-size: 1.2em;
+        }
+        .btn {
+            background: #FF69B4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #D1477F;
+        }
+        .popup {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 20px);
+    transform: translateX(-50%);
+    background: white;
+    padding: 40px;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+        .popup button {
+            margin-top: 15px;
+            background: #FF69B4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background: #D1477F;
+        }
+        .music-control {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 105, 180, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="ILY.mp3" type="audio/mp3">
+        Browser Anda tidak mendukung tag audio.
+    </audio>
+    <audio id="background-music" loop>
+        <source src="ILY.mp3" type="audio/mp3">
+        Browser Anda tidak mendukung tag audio.
+    </audio>
+    <audio id="background-music" loop>
+        <source src="ILY.mp3" type="audio/mp3">
+        Browser Anda tidak mendukung tag audio.
+    </audio>
+    <div class="music-control">
+        <button class="btn" onclick="toggleMusic()">🎵 Putar / Hentikan Musik</button>
+    </div>
+    
+    <div class="container">
+        <h1>Selamat Datang!</h1>
+        <p>Website ini dibuat khusus untuk perempuan bernama PUTRI!! CONGRATSS.</p>
+        <button class="btn" onclick="showPopup('Heii Happy 18th🌷 Adik Kecil, Semoga Impian kamu terwujud yaa, makasi banyak buat kamu dan keluarga kamu jugaa, makasih udah mau ngukir moment di tasik bareng aku')">Thanks U!!</button>
+        <button class="btn" onclick="showPopup('Makasih yaa udah mau cerita barerng aku, makasi udah mau ngebales chat aku meskipun aku tau kamu males chatan, makasi banyakk yaa, maaff kalo aku masi belum pantes buat kamu')">ucapan</button>
+        <button class="btn"><a href="FB.html" style="text-decoration-line: none; color: white;">Pesan Buat Aku?</button></a>
+        <button class="btn"><a href="Video/sup.html" style="text-decoration-line: none; color: white;">?</button></a>
+    </div>
+    
+    <div id="popup" class="popup" style="display: none;">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">Tutup</button>
+    </div>
+
+    <script>
+        function showPopup(message) {
+            document.getElementById("popup-message").innerText = message;
+            document.getElementById("popup").style.display = "flex";
+        }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        
+        function toggleMusic() {
+            var music = document.getElementById("background-music");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+    </script>
+</body>
+</html>
