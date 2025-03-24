@@ -72,11 +72,14 @@
             background-position: center;
             background-repeat: no-repeat;
             transform-origin: left;
-            transition: transform 1s;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
             border-radius: 10px;
             box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
         }
-        .page.flipped { transform: rotateY(-180deg); }
+        .page.flipped { 
+            transform: rotateY(-180deg);
+            opacity: 0.6;
+        }
         .hidden { display: none; }
         .secret-message {
             margin-top: 20px;
@@ -106,7 +109,7 @@
         </div>
         <div class="page-number" id="pageNumber">1</div>
     </div>
-    <button class="secret-message hidden" id="secretButton"><a href="rs.html">Ucapan Rahasia</a></button>
+    <button class="secret-message hidden" id="secretButton"><a href="rs.html" style="text-decoration-line: none; color: white;">Ucapan Rahasia</button></a>
     <script>
         let currentPage = 0;
         function updatePageNumber() {
