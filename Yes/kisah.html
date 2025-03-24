@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Animasi Buku</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5dc;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .swipe-instruction {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 10px;
+            border-radius: 5px;
+            z-index: 101;
+            opacity: 0.8;
+            transition: opacity 0.5s;
+        }
+        .swipe-instruction:hover {
+            opacity: 1;
+        }
+        .page-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 6px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+        .book-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .book {
+            position: relative;
+            width: 90vw;
+            max-width: 400px;
+            height: auto;
+            aspect-ratio: 3 / 5;
+            perspective: 1500px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform-origin: left;
+            transition: transform 1s;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        .page.flipped { transform: rotateY(180deg); }
+        .hidden { display: none; }
+        .secret-message {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .secret-message:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="swipe-instruction">Geser ke kanan untuk halaman selanjutnya, geser ke kiri untuk sebelumnya</div>
+    <div class="book-container" id="bookContainer">
+        <div class="book">
+            <script>
+                for (let i = 1; i <= 26; i++) {
+                    document.write(`<div class="page" style="background-image: url('../Yes/assets/page${i}.jpg'); z-index: ${26 - i};"></div>`);
+                }
+            </script>
+        </div>
+        <div class="page-number" id="pageNumber">1</div>
+    </div>
+    <button class="secret-message hidden" id="secretButton" onclick="alert('Selamat! Kamu telah menyelesaikan buku ini! 🎉')">Ucapan Rahasia</button>
+    <script>
+        let currentPage = 0;
+        function updatePageNumber() {
+            document.getElementById('pageNumber').innerText = currentPage + 1;
+            if (currentPage === 25) {
+                document.getElementById('secretButton').classList.remove('hidden');
+            } else {
+                document.getElementById('secretButton').classList.add('hidden');
+            }
+        }
+        function flipPage() {
+            let pages = document.querySelectorAll('.page');
+            if (currentPage < pages.length - 1) {
+                pages[currentPage].classList.add('flipped');
+                currentPage++;
+                updatePageNumber();
+            }
+        }
+        function prevPage() {
+            let pages = document.querySelectorAll('.page');
+            if (currentPage > 0) {
+                currentPage--;
+                pages[currentPage].classList.remove('flipped');
+                updatePageNumber();
+            }
+        }
+        
+        let touchStartX = 0;
+        let touchEndX = 0;
+        document.getElementById('bookContainer').addEventListener('touchstart', function(event) {
+            touchStartX = event.touches[0].clientX;
+        }, false);
+        document.getElementById('bookContainer').addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].clientX;
+            handleSwipe();
+        }, false);
+        function handleSwipe() {
+            if (touchStartX - touchEndX > 50) {
+                flipPage();
+            } else if (touchEndX - touchStartX > 50) {
+                prevPage();
+            }
+        }
+    </script>
+</body>
+</html>
